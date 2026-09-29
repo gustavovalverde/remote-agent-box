@@ -6,5 +6,8 @@
 
 vercel-labs/skills --skill find-skills
 
+# Optional, only if you run Herdr (docs/do/08-optional-multiplexer.md); uncomment to install:
+# herdrdev/herdr --skill herdr
+
 # <owner/repo>
 # <owner/repo> --skill <name>
