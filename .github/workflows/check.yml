@@ -1,0 +1,48 @@
+name: check
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Public-content lint
+        env:
+          PUBLIC_DENYLIST: ${{ secrets.PUBLIC_DENYLIST }}
+          # Fork pull requests have no secrets; only pushes to a repo that sets the variable must have a denylist.
+          REQUIRE: ${{ github.event_name == 'push' && vars.REQUIRE_DENYLIST == 'true' && '--require-denylist' || '' }}
+        run: scripts/check-public.sh $REQUIRE
+
+      - name: Commit email check
+        run: scripts/check-public.sh --commits
+
+      - name: Secret scan
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Organization-owned repos also need a GITLEAKS_LICENSE secret; confirm the terms at gitleaks.io.
+          GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
+
+      - name: Shellcheck
+        run: shellcheck scripts/*.sh
+
+      - name: Validate JSON examples
+        run: |
+          shopt -s nullglob
+          files=(examples/*.json)
+          [ "${#files[@]}" -eq 0 ] || jq empty "${files[@]}"
+
+      - name: Validate TOML examples
+        run: |
+          shopt -s nullglob
+          files=(examples/*.toml)
+          [ "${#files[@]}" -eq 0 ] || python3 -c 'import sys,tomllib; [tomllib.load(open(p,"rb")) for p in sys.argv[1:]]' "${files[@]}"

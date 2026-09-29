@@ -1,0 +1,22 @@
+# Merge by hand into ~/.codex/config.toml. Values are yours.
+# Approvals stay at the Codex defaults. Explained in docs/do/06-sync-skills-plugins-mcp.md.
+
+# model = "<model>"
+
+# Approvals off is an exception. Record it before you enable it:
+# see docs/learn/security-model.md.
+# approval_policy = "never"
+# sandbox_mode = "danger-full-access"
+
+[plugins."<plugin>@<marketplace>"]
+enabled = true
+
+# No tokens here. For OAuth servers run: codex mcp login <name>
+[mcp_servers.example]
+command = "npx"
+args = ["-y", "<package>"]
+
+# Disable one skill by path:
+# [[skills.config]]
+# path = "<absolute path to a skill dir>"
+# enabled = false
