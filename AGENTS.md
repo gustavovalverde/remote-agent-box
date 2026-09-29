@@ -64,12 +64,9 @@ Use `<box>`, `<user>`, `<mesh-ip>`, `<mesh-iface>`, `<public-ip>`, `<owner/repo>
 
 ### Before you commit
 
-Run `bash scripts/check-public.sh`; it fails on instance data such as mesh addresses, tailnet names, emails and em dashes. Set `PUBLIC_DENYLIST` to your own instance terms (hostnames, project names) to catch those too. Commit with a GitHub noreply email address, set before the first commit:
+Run `bash scripts/check-public.sh`; it fails on instance data such as mesh addresses, tailnet names, emails and em dashes. Set `PUBLIC_DENYLIST` to your own instance terms (hostnames, project names) to catch those too.
 
-1. `git config user.email '<id>+<user>@users.noreply.github.com'` (repo-local, so the global address is not used).
-2. On the GitHub account, enable "Block command line pushes that expose my email".
-3. Run `bash scripts/check-public.sh --commits` before the first push; the CI commit check only runs after the push, when an address is already public.
-4. Before publishing, set the `PUBLIC_DENYLIST` secret and the `REQUIRE_DENYLIST=true` variable. Without them CI skips the denylist and instance terms go unchecked.
+Before publishing, set the `PUBLIC_DENYLIST` secret and the `REQUIRE_DENYLIST=true` variable. Without them CI skips the denylist and instance terms go unchecked.
 
 ## Repository layout
 

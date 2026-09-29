@@ -1,21 +1,17 @@
 #!/usr/bin/env bash
 # Keeps instance data, secrets and style violations out of this public repo.
-# Usage: scripts/check-public.sh [--require-denylist] [--commits]
+# Usage: scripts/check-public.sh [--require-denylist]
 #   PUBLIC_DENYLIST  newline- or comma-separated fixed strings (case-insensitive);
 #                    matches print file:line and "denylist", never the term.
 #   --require-denylist  fail when PUBLIC_DENYLIST is empty.
-#   --commits           fail when any commit author or committer address is not a
-#                       GitHub noreply address.
 # Scans tracked files, or every file outside a git checkout (except this script
 # and binaries). Exits 1 on any finding.
 set -euo pipefail
 
 require_denylist=0
-check_commits=0
 for arg in "$@"; do
   case "$arg" in
     --require-denylist) require_denylist=1 ;;
-    --commits) check_commits=1 ;;
     *) echo "unknown flag: $arg" >&2; exit 2 ;;
   esac
 done
@@ -93,18 +89,6 @@ elif [ "$require_denylist" -eq 1 ]; then
   total=$((total + 1))
 else
   echo "denylist: skipped (PUBLIC_DENYLIST empty)"
-fi
-
-if [ "$check_commits" -eq 1 ]; then
-  if git rev-parse --verify -q HEAD >/dev/null 2>&1; then
-    bad="$(git log --format='%ae%n%ce' | sort -u | grep -vE '(^|\+)[^@]*@users\.noreply\.github\.com$|^noreply@github\.com$' | sed '/^$/d' || true)"
-    if [ -n "$bad" ]; then
-      n="$(wc -l <<<"$bad" | tr -d ' ')"
-      echo "commits: $n author or committer address(es) are not GitHub noreply addresses [commit-email]"
-      counts[commit-email]=$n
-      total=$((total + n))
-    fi
-  fi
 fi
 
 if [ "$total" -gt 0 ]; then

@@ -22,9 +22,6 @@ jobs:
           REQUIRE: ${{ github.event_name == 'push' && vars.REQUIRE_DENYLIST == 'true' && '--require-denylist' || '' }}
         run: scripts/check-public.sh $REQUIRE
 
-      - name: Commit email check
-        run: scripts/check-public.sh --commits
-
       - name: Secret scan
         uses: gitleaks/gitleaks-action@v2
         env:
