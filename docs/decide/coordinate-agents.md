@@ -14,20 +14,20 @@ You decide whether to run several coding agents through one unifying harness or 
 
 ## Why native CLIs
 
-Herdr starts the real CLI process, so the vendor's own login, metering and terms apply. It does not hold, combine or route credentials (Documented: [Herdr docs](https://herdr.dev/docs/agents/)).
+Herdr starts the real CLI process in a terminal pane, so the vendor's own login, metering and terms apply. Herdr takes no provider login of its own and does not combine allowances or choose billing routes (Observed, as of 2026-09).
 
 A unifying harness has to reach each provider itself, and each of the three below breaks at least one subscription meter (as of 2026-09):
 
-- **OpenCode:** Anthropic prohibits plugins that use a Claude Pro or Max login, so Claude goes through an API key (Documented: [OpenCode providers](https://opencode.ai/docs/providers/)).
-- **Pi:** its Claude route is billed as extra usage, not as ordinary included Claude usage (Documented: [Pi providers](https://pi.dev/docs/latest/providers)).
-- **fx:** it supports Codex and Grok subscription logins, one active provider per session, and has no Claude subscription provider (Documented: [fx authentication](https://fx.sh/docs/getting-started/authentication)).
+- **OpenCode:** it cannot use a Claude subscription ([why](choose-your-setup.md#opencode-cannot-use-a-claude-subscription)).
+- **Pi:** its providers page documents Claude only through API keys and tokens, with no Claude subscription route (Documented: [Pi providers](https://pi.dev/docs/latest/providers)), and Anthropic bars third parties from routing requests through subscription credentials ([subscription login](choose-your-setup.md#subscription-login)).
+- **fx:** it supports Codex and Grok subscription logins, one active provider at a time, and has no Claude subscription provider (Documented: [fx authentication](https://fx.sh/docs/getting-started/authentication)).
 
 These tools can still run inside a Herdr pane. The point is that they are not the way to spend a subscription you already hold.
 
 Two billing traps apply to native CLIs too:
 
 - `claude --bare` skips OAuth and keychain reads, so it cannot use a subscription; it needs an API key or a credential helper (Documented: [Claude Code headless](https://code.claude.com/docs/en/headless)). Plain `claude -p` can use the subscription login.
-- Do not set `ANTHROPIC_API_KEY` in the environment Herdr runs in unless you want API billing. Claude Code uses a present key instead of the subscription login (Documented: [Claude Code with Pro or Max](https://support.claude.com/en/articles/11145838-use-claude-code-with-your-pro-or-max-plan)). Check the active authentication before relying on a meter.
+- Do not set `ANTHROPIC_API_KEY` in the environment Herdr runs in unless you want API billing. Claude Code uses a present key instead of the subscription login (Documented: [Claude Code with a Claude plan](https://support.claude.com/en/articles/11145838-use-claude-code-with-your-pro-or-max-plan)). Check the active authentication before relying on a meter.
 
 Which login each client bills is in [where billing comes from](access-modes.md#where-billing-comes-from).
 
@@ -45,7 +45,7 @@ Which login each client bills is in [where billing comes from](access-modes.md#w
 | Worker | A well-specified, independent slice with explicit file ownership | Cheaper or faster tier where your harness offers one |
 | Reviewer | The exact candidate, read-only | A different model family from the author for consequential work |
 
-Cross-family review diversifies mistakes; it does not replace the repository's own checks. Which model fills a role is your choice and changes often, so this guide names none ([model pin keys](../do/06-sync-skills-plugins-mcp.md)).
+Cross-family review diversifies mistakes; it does not replace the repository's own checks. Which model fills a role is your choice and changes often, so this guide names none ([model pin keys](../do/06-sync-skills-plugins-mcp.md#7-pin-models-with-your-own-values)).
 
 **Parallelize only independent ownership.** Two writers never share a checkout. Read-only helpers use sibling panes; concurrent writers get separate worktrees ([recipe](../do/09-coordinate-agents-with-herdr.md#4-parallel-writers-in-worktrees)). Worktrees isolate files, not credentials, services or ports.
 

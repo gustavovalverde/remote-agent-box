@@ -104,7 +104,7 @@ herdr worktree create --cwd "$repo" --branch task/<a> --base "$base" --path <pat
 herdr worktree create --cwd "$repo" --branch task/<b> --base "$base" --path <path-b> --label <b> --no-focus
 ```
 
-Read each response before continuing; it returns pane and workspace ids under `.result` (Observed in Herdr 0.9.x, as of 2026-09). Start each worker with `herdr agent start ... --pane <returned pane id>` and confirm its reported cwd matches its assigned checkout. Send both assignments before waiting.
+Read each response before continuing; it returned `.result.root_pane.pane_id` and `.result.workspace.workspace_id` (Observed in Herdr 0.9.x, as of 2026-09). Start each worker with `herdr agent start ... --pane <root pane id>` and confirm its reported cwd matches its assigned checkout. Send both assignments before waiting.
 
 Require each worker to return its commit SHA, changed paths, targeted checks and open concerns. Before integrating, confirm:
 
@@ -172,7 +172,7 @@ Do not use `herdr server stop`, `herdr session stop`, an update or a process kil
 
 ### 9. Notifications are not acknowledgments
 
-With `ui.toast.delivery = "herdr"`, an attached client shows toasts for finished and needs-input agents without moving focus. A toast names the agent kind and workspace, so inspect the pane to find the exact agent. With default bindings, `ctrl+b` then `o` opens the visible notification's target; it does not answer anything. A vanished toast is not an acknowledgment, and `herdr notification show` only displays text. Delivery to a detached client, desktop or phone is Unverified. Use the lead's end-of-turn message as the durable record of a pending decision.
+With `ui.toast.delivery = "herdr"`, an attached client shows toasts for finished and needs-input agents without moving focus. A toast names the agent kind and workspace (Observed, as of 2026-09), so inspect the pane to find the exact agent. With default bindings, `ctrl+b` then `o` opens the visible notification's target; it does not answer anything. A vanished toast is not an acknowledgment, and `herdr notification show` only displays text. Delivery to a detached client, desktop or phone is Unverified. Use the lead's end-of-turn message as the durable record of a pending decision.
 
 ### 10. Recover from a timeout without repeating work
 
