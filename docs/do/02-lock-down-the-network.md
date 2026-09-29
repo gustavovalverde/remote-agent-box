@@ -17,7 +17,7 @@ SSH and every service reachable only over the mesh; nothing listening for the pu
 
 ### 1. Join the mesh
 
-Install the mesh client from the vendor's instructions. Tailscale is the worked example; Headscale works with the same steps; NetBird and plain WireGuard need their own client and policy tools, and may need an inbound UDP port (see step 5). Tailscale install: <https://tailscale.com/kb/1031/install-linux>.
+Install the mesh client from the vendor's instructions. Tailscale is the worked example; Headscale works with the same steps; NetBird and plain WireGuard need their own client and policy tools, and may need an inbound UDP port (see step 4). Tailscale install: <https://tailscale.com/kb/1031/install-linux>.
 
 ```bash
 sudo tailscale up

@@ -79,7 +79,7 @@ Run these when `df` shows the disk more than 70 percent full.
 ```bash
 node -v && corepack --version           # both print versions
 rustc -V                                # prints a version if you installed Rust
-ssh <box> 'id -nG' | grep -qw docker && echo ok   # ok; a fresh login, not this process
+id -nG <user> | grep -qw docker && echo ok   # ok; reads the group database, not this process
 sg docker -c 'docker run --rm -d -p 18080:80 --name bindcheck nginx:alpine && docker port bindcheck; docker rm -f bindcheck'
                                         # 80/tcp -> 127.0.0.1:18080
 gh auth status                          # logged in

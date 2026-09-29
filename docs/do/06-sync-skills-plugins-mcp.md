@@ -106,7 +106,7 @@ Keep `AGENTS.md` in `<notes-dir>`. Make `~/.claude/CLAUDE.md` start with the imp
 @<notes-dir>/AGENTS.md
 ```
 
-Use an import and not a symlink for Claude Code: Documented (as of 2026-09), `@AGENTS.md` is the supported way to share the file, and Claude's edit tools refuse to write through symlinks ([memory docs](https://code.claude.com/docs/en/memory)).
+Use an `@AGENTS.md` import to share the core with Claude Code. Documented (as of 2026-09): a symlinked `CLAUDE.md` also works in CLI sessions, but Cowork desktop sessions skip a symlinked `~/.claude/CLAUDE.md` and skip user-scope imports that resolve outside the session's working directory, so the `@<notes-dir>/AGENTS.md` line loads nothing there ([memory docs](https://code.claude.com/docs/en/memory)). If you use Cowork, keep the core inside the working directory or accept that it does not load in those sessions.
 
 Link the core for the other harnesses:
 
