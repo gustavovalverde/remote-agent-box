@@ -1,0 +1,10 @@
+# Skills manifest: one skill source per line.
+# Format: <owner/repo> [--skill <name>]
+# Blank lines and lines starting with # are ignored.
+# Apply with the loop in docs/do/06-sync-skills-plugins-mcp.md.
+# Keep your copy of this file in your box notes.
+
+vercel-labs/skills --skill find-skills
+
+# <owner/repo>
+# <owner/repo> --skill <name>

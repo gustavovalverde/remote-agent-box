@@ -1,0 +1,11 @@
+# Add this block to ~/.ssh/config on each device (laptop, desktop, phone SSH app if it imports config).
+# Replace <box>, <mesh-ip> and <user>. Use a concrete alias: the Codex app ignores pattern-only Host entries.
+# The alias is what every client uses: terminal, Claude desktop app, Codex app, Cursor, VS Code, Zed.
+Host <box>
+    # HostName can also be the box's mesh DNS name.
+    HostName <mesh-ip>
+    User <user>
+    IdentityFile ~/.ssh/id_ed25519
+    IdentitiesOnly yes
+    ServerAliveInterval 30
+    ServerAliveCountMax 4
