@@ -66,7 +66,7 @@ Two harness servers are easy to expose by accident. `codex app-server` has an ex
 
 tmux and Herdr are optional (see [optional multiplexer](../do/08-optional-multiplexer.md)). Neither separates anything. Their control surface is a local Unix socket, and any process running as the same user can read every pane and type into it.
 
-Documented ([Herdr persistence](https://herdr.dev/docs/persistence-remote/), [session state](https://herdr.dev/docs/session-state/)): Herdr's sockets are mode 0600, and its socket API can inject input into any pane, so anything running as your user controls the agents inside. With `pane_history = true`, Herdr writes pane output to `session-history.json` on disk, and that output may contain secrets. Leave it off unless you want that file.
+Documented ([Herdr persistence](https://herdr.dev/docs/persistence-remote/), [session state](https://herdr.dev/docs/session-state/)): Herdr's sockets are mode 0600, and its socket API can inject input into any pane, so anything running as your user controls the agents inside. With `pane_history = true`, Herdr writes recent pane output to `session-history.json` on disk, and that output can contain prompts, code, logs and secrets. It is off by default. Turning it on is a deliberate trade-off for screen replay after a server restart, and you then treat `~/.config/herdr` like terminal history; the trade-off is set out in [add a multiplexer](../do/08-optional-multiplexer.md#trade-off-pane-history).
 
 ## Harness approvals
 

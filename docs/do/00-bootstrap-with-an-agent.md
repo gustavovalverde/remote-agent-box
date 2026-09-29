@@ -65,7 +65,7 @@ Anything secret is recorded as a key name or a placeholder, never as a value. Th
 
 ### 4. Walk the do/ pages in order
 
-Run [01](01-provision-the-host.md), [02](02-lock-down-the-network.md), [03](03-install-toolchains.md), [04](04-install-agent-harnesses.md), [05](05-connect-clients.md), [06](06-sync-skills-plugins-mcp.md) and [07](07-back-up.md). Run [08](08-optional-multiplexer.md) only if you chose a multiplexer.
+Run [01](01-provision-the-host.md), [02](02-lock-down-the-network.md), [03](03-install-toolchains.md), [04](04-install-agent-harnesses.md), [05](05-connect-clients.md), [06](06-sync-skills-plugins-mcp.md) and [07](07-back-up.md). Run [08](08-optional-multiplexer.md) only if you chose a multiplexer, and [09](09-coordinate-agents-with-herdr.md) only if you chose Herdr and want a lead agent supervising others.
 
 For each page the agent reads Goal and Before you start, runs the Steps, runs every Check, records the results in `host.md`, and stops on any failure. A failed check is fixed until the original check passes; it is never skipped. The agent follows the operating rules in [AGENTS.md](../../AGENTS.md#if-you-are-building-a-box) throughout.
 
@@ -99,4 +99,5 @@ git -C <notes-dir> log -1 --oneline     # shows the latest notes commit
 | 05 | Install the desktop apps and add the SSH host on each device and in your editor. |
 | 06 | Trust prompts, MCP OAuth consent, Codex hook re-trust. |
 | 07 | Create the backup storage account; store the restic password in a password manager. |
-| 08 | Install a phone SSH app and key (only if you chose a multiplexer). |
+| 08 | Install a phone SSH app and key, and decide whether to keep `pane_history` (only if you chose a multiplexer). |
+| 09 | Sign in to each harness CLI, and answer any blocked question (only if you run a lead agent in Herdr). |

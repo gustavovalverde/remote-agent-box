@@ -41,6 +41,8 @@ Which client runs on which OS is in [client OS support](access-modes.md#client-o
 
 The desktop apps keep their own long-lived processes on the box ([access modes](access-modes.md#what-survives-a-disconnect)), so a multiplexer adds little for them. Add tmux or Herdr only if you run terminal agents that you want to reattach from any SSH client, or you want to SSH from a phone into live sessions. When that is worth it, and how to set each up, is in [add a multiplexer](../do/08-optional-multiplexer.md).
 
+**Orchestration default:** one lead agent supervising the native CLIs inside Herdr, not a unifying harness or a custom controller, so every harness keeps its own subscription login. Run several agents only when the work splits into independent pieces. The reasons and the operating model are in [coordinate several agents](coordinate-agents.md); the recipes are in [coordinate agents with Herdr](../do/09-coordinate-agents-with-herdr.md).
+
 ## 6. Harnesses and billing
 
 You pay for a harness in one of two ways: a subscription login (a plan account) or an API key (per-token billing, including gateways).

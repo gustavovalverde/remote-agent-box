@@ -9,7 +9,7 @@ Build an always-on Linux box that runs Claude Code, Codex and other coding harne
 - Skills, plugins, instructions and MCP servers kept in sync from manifests, so no harness holds a private copy.
 - Encrypted, scheduled, restore-tested backups of agent config, manifests, mesh identity and project secrets.
 - Harness approvals on.
-- No multiplexer, unless you choose to add one.
+- No multiplexer, unless you choose to add one (Herdr adds an optional lead-agent operating model).
 
 ## How it fits together
 
@@ -31,7 +31,7 @@ Read [how it works](docs/learn/how-it-works.md), then [the security model](docs/
 
 ### Decide your setup
 
-Read [choose your setup](docs/decide/choose-your-setup.md) for the choices that shape the build, then [access modes](docs/decide/access-modes.md) to compare ways of reaching agents.
+Read [choose your setup](docs/decide/choose-your-setup.md) for the choices that shape the build, then [access modes](docs/decide/access-modes.md) to compare ways of reaching agents. To run several agents at once, read [coordinate several agents](docs/decide/coordinate-agents.md).
 
 ### Build it with your coding agent
 
@@ -55,6 +55,7 @@ Work through `docs/do/` in order:
 6. [Sync skills, plugins, instructions and MCP](docs/do/06-sync-skills-plugins-mcp.md)
 7. [Back up the box](docs/do/07-back-up.md)
 8. [Add a multiplexer](docs/do/08-optional-multiplexer.md), only if you want one
+9. [Coordinate agents with Herdr](docs/do/09-coordinate-agents-with-herdr.md), only if you chose Herdr and want a lead agent supervising others
 
 ## Before you start
 
@@ -76,6 +77,7 @@ Your IP addresses, hostnames, emails, tokens, model choices and project names. P
 | [docs/learn/security-model.md](docs/learn/security-model.md) | What protects the box, and which exceptions need recording? |
 | [docs/decide/choose-your-setup.md](docs/decide/choose-your-setup.md) | Which options fit me, and what are the defaults? |
 | [docs/decide/access-modes.md](docs/decide/access-modes.md) | How do clients reach agents, and what survives a disconnect or reboot? |
+| [docs/decide/coordinate-agents.md](docs/decide/coordinate-agents.md) | Should I supervise native CLIs or use a unifying harness, and how many agents do I run? |
 | [docs/do/00-bootstrap-with-an-agent.md](docs/do/00-bootstrap-with-an-agent.md) | How does my coding agent run this build? |
 | [docs/do/01-provision-the-host.md](docs/do/01-provision-the-host.md) | How do I get a sized, updated box with a non-root user? |
 | [docs/do/02-lock-down-the-network.md](docs/do/02-lock-down-the-network.md) | How do I join the mesh and close public interfaces? |
@@ -84,9 +86,11 @@ Your IP addresses, hostnames, emails, tokens, model choices and project names. P
 | [docs/do/05-connect-clients.md](docs/do/05-connect-clients.md) | How do I connect desktop apps, editors and a phone, and prove agents survive a disconnect? |
 | [docs/do/06-sync-skills-plugins-mcp.md](docs/do/06-sync-skills-plugins-mcp.md) | How do I keep skills, plugins, instructions and MCP in sync? |
 | [docs/do/07-back-up.md](docs/do/07-back-up.md) | How do I back up and test a restore? |
-| [docs/do/08-optional-multiplexer.md](docs/do/08-optional-multiplexer.md) | How do I add tmux or Herdr if I want one? |
+| [docs/do/08-optional-multiplexer.md](docs/do/08-optional-multiplexer.md) | How do I add tmux or Herdr, and configure Herdr, if I want one? |
+| [docs/do/09-coordinate-agents-with-herdr.md](docs/do/09-coordinate-agents-with-herdr.md) | How does a lead agent supervise other agents in Herdr with evidence-based completion? |
 | [examples/ssh-config](examples/ssh-config) | What does a client SSH config for the box look like? |
 | [examples/docker-daemon.json](examples/docker-daemon.json) | How do I make Docker bind to loopback by default? |
+| [examples/herdr-config.toml](examples/herdr-config.toml) | What is the tested Herdr config baseline? |
 | [examples/skills.txt](examples/skills.txt) | What does a skills manifest look like? |
 | [examples/claude-settings.fragment.json](examples/claude-settings.fragment.json) | Which Claude settings declare marketplaces and plugins? |
 | [examples/codex-config.fragment.toml](examples/codex-config.fragment.toml) | Which Codex config keys matter for this setup? |
